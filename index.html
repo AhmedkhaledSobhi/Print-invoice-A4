@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>print invoic </title>
+  <style>
+
+body{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container-invoive{
+      width: 60% !important;
+      margin: auto;
+      border: 1px solid;
+    }
+    .print-fatoorah-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 24px;
+      border-bottom: 1px solid #eaeced;
+      background-color: #fafafa;
+    }
+    .print-fatoorah-name-user{
+      color: #283c47;
+      font-size: 14px;
+    }
+    .print-fatoorah-info{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .print-fatoorah-info div:first-child {
+      margin-left: 15px;
+    }
+    .print-fatoorah-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 8px;
+    }
+    .print-fatoorah-detail p {
+      color: #545454;
+      font-size: 14px;
+      margin: 0 8px;
+    }
+    .print-fatoorah-detail span {
+      color: #545454;
+      font-size: 14px;
+    }
+/* -------------------------------- */
+    .print-fatoorah-content {
+      padding: 4px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .print-fatoorah-invoices{
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .print-img-fatoorah{
+      width: 150px; 
+      aspect-ratio: 1 / 1;
+      margin: auto;
+    }
+    .print-img-fatoorah img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .print-fatoorah-title-contain{
+      background-color: #FFFF;
+      /* background-color: coral; */
+      text-align: center;
+      width: 45%;
+    }
+
+    .print-invoices-title{
+      font-size: 17px;
+      font-weight: 700;
+      margin: 7px auto;
+    }
+    .print-invoices-subtitle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .print-invoices-subtitle h5,
+    .print-invoices-subtitle h6{
+      font-size: 14px;
+      font-weight: 600;
+      color: #969595;
+      margin: 3px !important;
+      padding: 3px !important;
+    }
+
+    .print-invoices-subtitle h5{
+      margin-left: 0.5rem;
+    }
+
+    .fatoorah-qrcode{
+      background-color: crimson;
+      display: flex; 
+    }
+    /* ---------------------------- */
+
+    .col-print-invoic-frist,
+    .col-print-invoic-last{
+      min-height: 100px; 
+      max-height: 200px;
+    }
+    
+    .body-content{
+      display: flex !important;
+      flex-direction: column !important;
+      margin: 10px auto 5px !important;
+    }
+  
+    .content-Customer-data{
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 35px;
+      height: auto
+    }
+    .print-fatoorah-info-customer-title{
+      display: flex;
+      justify-content: start;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+    .print-fatoorah-info-customer{
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      height: 10%;
+    }
+    .print-fatoorah-info-customer .title-info{
+      font-size: 14px;
+      font-weight: 800;
+      margin-left: 15px;
+      padding-right: 20px;
+      width: 50%;
+      color: #7a7979;
+    }
+    .print-fatoorah-info-customer .w-info{
+      width: 100%;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: start;
+      padding: 0px !important;
+      margin: 0px !important;
+    }
+
+    /* ---------------------------- */
+
+    .table-content {
+      padding: 8px 8px;
+      background-color: #f9f9f9;
+    }
+    .print-table, 
+    .print-table th, 
+    .print-table td, 
+    .table-content thead th {
+      padding: 3px;
+    }
+
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      vertical-align: top;
+      border-spacing: 0;
+      caption-side:bottom;
+      text-indent: initial;
+    }
+    .table > thead {
+      vertical-align: bottom;
+    }
+
+    thead, 
+    tbody, 
+    tfoot, 
+    tr,td,th {
+      border-width: 0;
+    }
+
+    .print-table tfoot td:first-child, 
+    .print-table thead tr th:first-child {
+      border-right-style: solid;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .print-table tfoot td:last-child, 
+    .print-table thead tr th:last-child {
+      border-left-style: solid;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .print-table tfoot td, 
+    .print-table thead tr th {
+      background-color: rgb(235, 236, 237);
+      color: #283c47;
+      font-weight: 700;
+      padding: 8px 5px;
+    }
+
+    .print-table thead th, 
+    .print-table tbody th, 
+    .print-table tbody td, 
+    .print-table thead td, 
+    .print-table tfoot td {
+      text-align: center;
+    }
+    .print-table, 
+    .print-table th, 
+    .print-table td, 
+    .table-content thead th {
+      padding: 3px;
+    }
+
+    .print-table tfoot::before, 
+    .print-table tbody::before {
+      content: "";
+      display: block;
+      height: 15px;
+    }
+    .print-table tbody td:first-child {
+      width: 10px;
+      height: 20px;
+      color: #757b7e;
+      font-size: 16px;
+    }
+    .print-table tbody td {
+      width: 40px;
+      border: 1px solid rgba(205, 207, 208, 0.5);
+    }
+    /* --------------------------------- */
+
+    .contain-footer-print{
+      margin: 10px 15px;
+    }
+    .contain-footer-print-row{
+      display: flex;
+      justify-content: space-between;
+    }
+    .contain-footer-print-first-col{
+      padding: 10px 20px;
+      width: 45%;
+    }
+    .contain-footer-print-last-col{
+      padding: 10px 20px;
+      width: 40%;
+    }
+    .accounting-payment-methods{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 25px;
+      height: 30px;
+    }
+
+    .accounting-my{
+      margin: 7px auto;
+    }
+    .row-payment-methods{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+    }
+    .payment-methods-col{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 45%;
+      height: 40px;
+    }
+    .payment-methods-col-item{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;      
+    }
+
+    .payment-text-end{
+      text-align: start;
+    }
+
+  </style>
+</head>
+<body>
+
+  <section dir="rtl" class="container-invoive">
+    
+    <div class="print-fatoorah-header">
+      <div class="print-fatoorah-name-user">
+        Ahmed Khaled Sobhi
+      </div>
+      <div class="print-fatoorah-info">
+        <div class="print-fatoorah-detail">
+          <p>
+            تاريخ الطباعة :
+          </p>
+          <span>25-08-2024</span>
+        </div>
+        <div class="print-fatoorah-detail">
+          <p>الوقت:</p>
+          <span style="direction: ltr;">14:03 PM</span>
+        </div>
+      </div>
+    </div>
+    <!-- --------------------------------------------- -->
+
+    <div class="print-fatoorah-content">
+      <div class="print-fatoorah-invoices ">
+
+        <div class="print-fatoorah-invoices-img">
+          <div class="print-img-fatoorah">
+            <img src="https://newclient-api.fatoorah.sa/images/Client/12677309661720942485.jpg" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <div class="print-fatoorah-title-contain">
+
+          <div class="print-invoices-title">
+            <div class="localization-text-wrapper">
+              <span class="">فاتورة ضريبية</span>
+            </div>
+          </div>
+
+          <div class="print-invoices-subtitle ">
+            
+            <h5>رقم الفاتورة</h5>
+            <h6>INV-57</h6>
+          </div>
+
+          <div class="print-invoices-subtitle ">
+              <h5>تاريخ الفاتورة</h5>
+              <h6>2024-07-20</h6>
+          </div>
+
+        </div>
+
+        <div class="fatoorah-qrcode ">
+          <canvas height="160" width="160" style="height: 128px; width: 128px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------- -->
+
+    <div class="body-content">
+      <div>
+        <div class="content-Customer-data ">
+          <div class="col-print-invoic-frist">
+            <h5 class="print-fatoorah-info-customer-title"> 
+              معلومات المشتري 
+            </h5>
+            <div class="print-fatoorah-info-customer ">
+              <h6 class="title-info"> اسم العميل: </h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info data-info">Ahmed Khaled</p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info">رقم الهاتف:</h6>
+              <div class="w-info ">
+                <p class="text-black text-start data-info"> 5036695245 </p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+                <h6 class="title-info">العنوان: </h6>
+                <div class="w-info ">
+                  <p class="text-black text-start data-info"> المدينة المنورة - المملكة العربية السعودية - المدينة </p>
+                </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info">الرقم الضريبي: </h6>
+              <div class="w-info ">
+                <p class="text-black text-start data-info"> 12345678912121 </p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info">رقم السجل التجاري:</h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info"> 1234567891 </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-print-invoic-last">
+            <h5 class="print-fatoorah-info-customer-title">
+               معلومات البائع 
+            </h5>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info"> اسم البائع: </h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info"> Ahmed Khaled Sobhi </p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info">رقم الهاتف: </h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info">0544271924 </p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info"> العنوان: </h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info"> الدوادمي - المملكة العربية السعودية - الرياض </p>
+              </div>
+            </div>
+            <div class="print-fatoorah-info-customer">
+              <h6 class="title-info"> الرقم الضريبي: </h6>
+              <div class="w-info">
+                <p class="text-black text-start data-info"> 123456789123456 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------- -->
+<br>
+    <div dir="rtl" class="table-content">
+      <div class="">
+        <table class="print-table table">
+          <thead>
+            <tr>
+
+              <th style="width: 10px;">
+                <div class=" ">
+                  <span style="width: 10px;">
+                    #
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 70px;">
+                <div class=" ">
+                  <span style="width: 70px;">
+                    اسم المنتج
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    الكمية
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    سعر الوحدة
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    إجمالي القيمة 
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    الخصم 
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    الضريبة 1
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 40px;">
+                <div class=" ">
+                  <span style="width: 95px;">
+                    الضريبة 2
+                  </span>
+                </div>
+              </th>
+
+              <th style="width: 70px;">
+                <div class=" ">
+                  <span style="width: 70px;">
+                    الإجمالي شامل الضريبة 
+                  </span>
+                </div>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 </td>
+              <td>Ahmed Khattab </td>
+              <td>5 </td>
+              <td>100 ر.س </td>
+              <td>500 ر.س </td>
+              <td>0 ر.س </td>
+              <td>75 (%15.00) ر.س </td>
+              <td>75 (%15.00) ر.س </td>
+              <td>650 ر.س </td>
+            </tr>
+            <tr>
+              <td>2 </td>
+              <td>test product invoice fatoorh </td>
+              <td>10 </td>
+              <td>150 ر.س </td>
+              <td>1500 ر.س </td>
+              <td>0 ر.س </td>
+              <td>0 (0) ر.س </td>
+              <td>0 (0) ر.س </td>
+              <td>1500 ر.س </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Sobhi</td>
+              <td>5</td>
+              <td>10 ر.س</td>
+              <td>50 ر.س</td>
+              <td>0 ر.س</td>
+              <td>0 (0) ر.س</td>
+              <td>0 (0) ر.س</td>
+              <td>50 ر.س</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ------------------ -->
+
+    <section class="contain-footer-print">
+      <div class="contain-footer-print-row   ">
+        <div class="contain-footer-print-first-col">
+          <div class=" d-flex align-content-between flex-column">
+            <div style="margin-bottom: 0px;">
+              <strong class="text-black mb-2">ملاحظات :</strong>
+              <div style="line-height: 24px;">
+                <p style="margin-bottom: 3px;">
+                  هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contain-footer-print-last-col">
+          <div>
+            <div class="accounting-payment-methods ">
+              <h5 class="text-black" style="font-size: 12px;">الإجمالي قبل الضريبة</h5>
+              <span class="w-50 text-end">
+                <h6>2050 ر.س</h6>
+              </span>
+            </div>
+            
+            <hr style="opacity: inherit; color: gray; margin: 10px auto;">
+
+            <div class="accounting-payment-methods justify-content-between  align-items-center my-1">
+              <h5 style="font-size: 12px;">الخصم</h5>
+              <span class="w-50 text-end">
+                <h6>0 ر.س</h6>
+              </span>
+            </div>
+
+            <div class="accounting-payment-methods accounting-my  my-1">
+              <h5 style="font-size: 12px; display: flex;"> ضريبة قيمة مضافة (15.00%) </h5>
+              <span class=" text-end">
+                <h6>75 ر.س</h6>
+              </span>
+            </div>
+
+            <div class="accounting-payment-methods accounting-my   my-1">
+              <h5 style="font-size: 12px; display: flex;"> taxevalue (15.00%) </h5>
+              <span class=" text-end">
+                <h6>75 ر.س</h6>
+              </span>
+            </div>
+            
+            <hr style="opacity: inherit; color: gray; margin: 10px auto;">
+            
+            <div class="accounting-payment-methods justify-content-between">
+              <h5 class="text-black" style="font-size: 12px;">الإجمالي شامل الضريبة</h5>
+              <span class="w-50 text-end">
+                <h6>2200 ر.س</h6>
+              </span>
+            </div>
+            <hr style="opacity: inherit; color: gray; margin: 10px auto;">
+            
+            <div class="row-payment-methods  gx-1">
+              <div class="payment-methods-col">
+                <div class="payment-methods-col-item my-1">
+                  <h6 class="text-black" style="font-size: 12.3px;">كاش </h6>
+                  <span class=" payment-text-end d-flex">
+                    <h6 class=" payment-text-end d-flex">2,100   ر.س</h6>
+                  </span>
+                </div>
+              </div>
+
+              <div class="payment-methods-col">
+                <div class="payment-methods-col-item my-1">
+                  <h6 class="text-black" style="font-size: 12.3px;">شبكه  </h6>
+                  <span class=" payment-text-end d-flex">
+                    <h6 class=" payment-text-end d-flex">2,100   ر.س</h6>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <br><br>
+
+  
+</body>
+</html>
